@@ -1,6 +1,6 @@
-=================
-Eve-tree-resource
-=================
+==================
+Eve-tree-resources
+==================
 
 Sometimes we have to make some kind of queries against our collections where
 the most optimized data structure is a tree. Eve tree resource is an attempt
@@ -36,37 +36,46 @@ Document will be inserted in the data base with the fields `parent`, `path`
 and `leaf` filled with the properly values to be used further to query you
 resource as a tree shape.
 
-If you want to use another field to get the relation between
-two nodes you can configure it with the keyword `relation_field` in the treeify
-function, by defautl it uses the `_id` field. 
-
-Current implemenation do not implement any kind of restriction for the value
-of `relation_field`, therefore duplicate values in the same tree level have
-to be avoided. 
+If you want to use another field to get the relation between two nodes you can
+configure it with the keyword `relation_by` in the treeify function, by 
+defautl it uses the `_id` field. For other fields different that the `id` and
+due the value of this field is used to find out the parent of the new document
+this have to be configured as `unique` in the schema.
 
 For example, if your resource is a tree of geographical zones and you have a
 unique field called `name` you can use it as you can see in the next example:
 
-.. code-block:: pythony
+.. code-block:: python
 
-    treeify("locations", app, relation_field="name")
+    treeify("locations", app, relation_by="name")
     
-Also the default name of the fields `parent`, `path` and `leaf` can be
-override for as you can see into the next example:
+The default the fields names used such as  `parent`, `path` and `leaf` can be
+override by these field names that you want, as you can see into the next
+example:
 
-.. code-block:: pythony
-    treeify("locations", app, relation_field="name",
-            parent_field="yourfield",
-            leaf_field="yourleaffield",
-            path_field="yourpathfield")
+.. code-block:: python
+
+    treeify("locations", app, relation="name",
+            parent="yourfield",
+            leaf="yourleaffield",
+            path="yourpathfield")
     
-The path field is always the concatenation of the `relation_field` values of his
+The path field is by default the concatenation of the `relation_by` values of his
 parents separated by dots. It gets help of the monngodb index implementation
 that uses BTrees [1]_, therefore we can get all children of a specific document using
 the `path` field.
 
-For example considering the zones resource where we used the field `name` we
-can get all children of location with a query like that:
+The default `relation_by` can be override by the `concatenation` keyword, in that
+case you must be make sure that the new settings of `cocatenation` gets a field
+that never got duplicates in the same tree level. 
+
+.. code-block:: python
+
+    treeify("locations", app, concatenation="name")
+
+The previous example use configure the locations resource to use the field
+`name` as a source of the `path` field. Then we can get all children of one
+location with a query like that:
 
 .. code-block::bash
 
