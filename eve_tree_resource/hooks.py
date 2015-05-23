@@ -8,7 +8,7 @@ from json import dumps
 from eve.utils import ParsedRequest
 from eve.methods.patch import patch_internal
 
-from tree_resource.config import get_config
+from eve_tree_resource.config import get_config
 
 
 def register_hooks(app, resource):

@@ -9,8 +9,8 @@ from bson import ObjectId
 from pymongo import MongoClient
 from collections import namedtuple
 
-from tree_resource import treeify
-from tree_resource.tests.settings import (
+from eve_tree_resource import treeify
+from eve_tree_resource.tests.settings import (
     MONGO_HOST,
     MONGO_PORT,
     MONGO_DBNAME)

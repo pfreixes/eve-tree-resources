@@ -3,15 +3,15 @@
 Eve tree resource covers your Eve resource with the needed fields and
 hooks tho handle this resource as a tree.
 """
-from tree_resource.hooks import register_hooks
-from tree_resource.config import build_config
+from eve_tree_resource.hooks import register_hooks
+from eve_tree_resource.config import build_config
 
 try:
     # 0.6 Eve vesion comes with creation index suport
     # along with the schema
     from eve.io.mongo.mongo import create_index
 except ImportError:
-    from tree_resource.mongo import create_index as create_index_internal
+    from eve_tree_resource.mongo import create_index as create_index_internal
     create_index = None
 
 
