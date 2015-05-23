@@ -53,16 +53,18 @@ of a specific document using the `path` field.
 
 Next `curl` command shows how the query looks like:
 
-.. code-block::bash
+.. code-block:: bash
 
-    $ curl http://localhost/locations/?where={"path": {"$regex": {"^Europe.France."}}
+    $ curl http://localhost/locations/\
+        ?where={"path": {"$regex": {"^Europe.France."}}
 
 To get only the leafs we can expand the query with the properly condition as you
 can see into the next example:
 
-.. code-block::bash
+.. code-block:: bash
 
-    $ curl http://localhost/locations/?where={"$and":[{"path":" {"$regex": {^Europe.France/"}}},{"leaf":true}]}
+    $ curl http://localhost/locations/\
+        ?where={"$and":[{"path":" {"$regex": {^Europe.France/"}}},{"leaf":true}]}
 
 The leaf attribute is handled automaticly, that means that the new documents
 inserted are always set as leafs until it becomes parent of a child.
