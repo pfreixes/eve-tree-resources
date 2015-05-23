@@ -8,6 +8,12 @@ to write a Eve app to cover your resources with a set of functionalities to
 get a tree shape, so make queries such as get the children of some document
 using the properly indexes.
 
+To install it jus run the setup.py file as you can see in the next example
+
+.. code_block:: bash
+
+    $ ./setup.py install
+
 Cover your resource as a tree structure can be done using the 
 `eve_tree_resource.treeify` function. It takes the initizlized Eve app the name
 of the resource that you want to cover, and the field used to build
@@ -15,8 +21,8 @@ the Mongodb index.
 
 .. code-block:: python
 
-    from eve_tree_reresource import treeify
     from eve import Eve
+    from eve_tree_reresource import treeify
 
     app = Eve()
     treeify(app, "resource", "field")
