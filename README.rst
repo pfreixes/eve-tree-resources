@@ -10,7 +10,7 @@ using the properly indexes.
 
 To install it jus run the setup.py file as you can see in the next example
 
-.. code_block:: bash
+.. codeblock:: bash
 
     $ ./setup.py install
 
